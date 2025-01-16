@@ -4,10 +4,10 @@ import React from "react";
 import { Flame, Award, Tag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import tempImage from "@/media/images/istock.jpg";
 import Header from "@/components/Header";
 import FeatureAuction from "@/components/FeatureAuction";
 import { AuctionInterface } from "@/types/AuctionInterface";
+import wp from "@/media/images/wallpaper1.jpg";
 
 export default function Home() {
   // Sample featured auctions data
@@ -52,7 +52,7 @@ export default function Home() {
             </div>
             <div className="hidden md:block">
               <Image
-                src={tempImage}
+                src={wp}
                 alt="Featured auctions"
                 width={600}
                 height={400}

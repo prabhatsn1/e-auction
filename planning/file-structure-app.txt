@@ -1,0 +1,189 @@
+auction-website/
+├── .env
+├── .gitignore
+├── package.json
+├── next.config.js
+├── tsconfig.json
+├── middleware.ts
+│
+├── prisma/
+│   ├── schema.prisma
+│   └── seed.ts
+│
+├── public/
+│   ├── images/
+│   │   ├── logo.svg
+│   │   └── placeholders/
+│   └── icons/
+│
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── error.tsx
+│   ├── loading.tsx
+│   ├── not-found.tsx
+│   │
+│   ├── (auth)/
+│   │   ├── login/
+│   │   │   ├── page.tsx
+│   │   │   └── loading.tsx
+│   │   ├── register/
+│   │   │   ├── page.tsx
+│   │   │   └── loading.tsx
+│   │   └── forgot-password/
+│   │       └── page.tsx
+│   │
+│   ├── (main)/
+│   │   ├── auctions/
+│   │   │   ├── page.tsx
+│   │   │   ├── loading.tsx
+│   │   │   ├── create/
+│   │   │   │   └── page.tsx
+│   │   │   └── [id]/
+│   │   │       ├── page.tsx
+│   │   │       └── edit/
+│   │   │           └── page.tsx
+│   │   │
+│   │   └── categories/
+│   │       ├── page.tsx
+│   │       └── [slug]/
+│   │           └── page.tsx
+│   │
+│   ├── dashboard/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── profile/
+│   │   │   └── page.tsx
+│   │   ├── bids/
+│   │   │   └── page.tsx
+│   │   ├── auctions/
+│   │   │   └── page.tsx
+│   │   ├── watchlist/
+│   │   │   └── page.tsx
+│   │   └── settings/
+│   │       └── page.tsx
+│   │
+│   └── admin/
+│       ├── layout.tsx
+│       ├── page.tsx
+│       ├── users/
+│       │   └── page.tsx
+│       └── auctions/
+│           └── page.tsx
+│
+├── app/api/
+│   ├── auth/
+│   │   ├── login/
+│   │   │   └── route.ts
+│   │   ├── register/
+│   │   │   └── route.ts
+│   │   └── [...nextauth]/
+│   │       └── route.ts
+│   │
+│   ├── auctions/
+│   │   ├── route.ts
+│   │   └── [id]/
+│   │       ├── route.ts
+│   │       ├── bid/
+│   │       │   └── route.ts
+│   │       └── watch/
+│   │           └── route.ts
+│   │
+│   ├── users/
+│   │   ├── route.ts
+│   │   └── [id]/
+│   │       ├── route.ts
+│   │       ├── profile/
+│   │       │   └── route.ts
+│   │       └── bids/
+│   │           └── route.ts
+│   │
+│   └── webhooks/
+│       └── payment/
+│           └── route.ts
+│
+├── components/
+│   ├── layout/
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Sidebar.tsx
+│   │   └── Navigation.tsx
+│   │
+│   ├── auctions/
+│   │   ├── AuctionCard.tsx
+│   │   ├── AuctionGrid.tsx
+│   │   ├── BidForm.tsx
+│   │   ├── CountdownTimer.tsx
+│   │   └── ImageGallery.tsx
+│   │
+│   ├── forms/
+│   │   ├── LoginForm.tsx
+│   │   ├── RegisterForm.tsx
+│   │   └── AuctionForm.tsx
+│   │
+│   └── ui/
+│       ├── button.tsx
+│       ├── input.tsx
+│       ├── modal.tsx
+│       └── alert.tsx
+│
+├── lib/
+│   ├── prisma.ts
+│   ├── redis.ts
+│   ├── socket.ts
+│   └── utils/
+│       ├── auth.ts
+│       ├── formatting.ts
+│       └── validation.ts
+│
+├── hooks/
+│   ├── useAuth.ts
+│   ├── useAuction.ts
+│   ├── useBidding.ts
+│   ├── useWatchlist.ts
+│   ├── useSocket.ts
+│   └── useForm.ts
+│
+├── store/
+│   ├── index.ts
+│   ├── provider.tsx
+│   ├── hooks.ts
+│   │
+│   └── slices/
+│       ├── authSlice.ts
+│       ├── auctionSlice.ts
+│       ├── bidSlice.ts
+│       └── uiSlice.ts
+│
+├── types/
+│   ├── index.ts
+│   ├── auth.ts
+│   ├── auction.ts
+│   └── api.ts
+│
+└── README.md
+
+
+
+
+Key differences in this App Router structure:
+
+Route Organization:
+
+Uses Next.js 13+ App Router structure with folders representing routes
+Route groups (in parentheses) for logical organization
+Each route has its own page.tsx and optional loading.tsx
+
+
+API Routes:
+
+All API routes are in app/api
+Uses the new route.ts convention instead of traditional API handlers
+
+
+Route Groups:
+
+(auth) - Authentication related pages
+(main) - Main application pages
+dashboard - User dashboard section
+admin - Admin panel section
