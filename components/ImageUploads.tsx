@@ -36,6 +36,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
     <div className="flex flex-col items-center gap-4">
       <CldUploadWidget
         uploadPreset="your_upload_preset" // Replace with your upload preset
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onUpload={(result: any) =>
           handleUploadSuccess(result as CloudinaryResult)
         }

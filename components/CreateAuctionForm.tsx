@@ -41,6 +41,7 @@ export default function CreateAuctionForm() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleImageUpload = (result: any) => {
+    console.log("result :>> ", result);
     setImages((prev) => [...prev, result.info.secure_url]);
   };
 
@@ -75,6 +76,11 @@ export default function CreateAuctionForm() {
       setIsSubmitting(false);
     }
   };
+
+//   const handleImageUpload = (url: string) => {
+//     console.log("Uploaded image URL:", url);
+//     // Do something with the URL (e.g., save to database)
+//   };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -188,6 +194,8 @@ export default function CreateAuctionForm() {
             </p>
           </div>
         </div>
+
+        {/* <ImageUploads onUpload={handleImageUpload} /> */}
 
         {/* Price Settings */}
         <div className="bg-white p-6 rounded-lg shadow">
