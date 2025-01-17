@@ -1,4 +1,4 @@
-// app/auctions/create/page.tsx
+"use client";
 
 import CreateAuctionForm from "@/components/CreateAuctionForm";
 
