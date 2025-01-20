@@ -4,23 +4,53 @@ import React from "react";
 import { Flame, Award, Tag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import FeatureAuction from "@/components/FeatureAuction";
-import { AuctionInterface } from "@/types/Auction";
+import { Auction } from "@/types/Auction";
 import wp from "@/media/images/wallpaper1.jpg";
 
 export default function Home() {
   // Sample featured auctions data
-  const featuredAuctions: AuctionInterface[] = [
+  const featuredAuctions: Auction[] = [
     {
-      id: 1,
-      title: "Vintage Watch Collection",
-      currentBid: 1200,
-      timeLeft: "2h 15m",
-      imageUrl: "/media/images/istock.jpg",
-      bids: 23,
+      id: "1",
+      title: "Vintage Watch",
+      description: "A beautiful vintage watch from the 1950s.",
+      sellerId: "seller1",
+      startingPrice: 100,
+      reservePrice: 150,
+      currentPrice: 120,
+      startTime: new Date("2025-10-01T10:00:00Z"),
+      endTime: new Date("2025-10-10T10:00:00Z"),
+      status: "ACTIVE",
+      images: [
+        "https://res.cloudinary.com/dwapqaaya/image/upload/v1737038646/samples/breakfast.jpg",
+        "https://res.cloudinary.com/dwapqaaya/image/upload/v1737038648/cld-sample-4.jpg",
+      ],
+      category: ["Watches", "Vintage"],
+      createdAt: new Date("2025-09-01T10:00:00Z"),
+      updatedAt: new Date("2025-09-15T10:00:00Z"),
     },
-    // More auctions...
+    {
+      id: "2",
+      title: "Antique Vase",
+      description: "An exquisite antique vase from the Ming dynasty.",
+      sellerId: "seller2",
+      startingPrice: 500,
+      reservePrice: 700,
+      currentPrice: 550,
+      startTime: new Date("2025-10-05T10:00:00Z"),
+      endTime: new Date("2025-10-15T10:00:00Z"),
+      status: "ACTIVE",
+      images: [
+        "https://res.cloudinary.com/dwapqaaya/image/upload/v1737038647/samples/cup-on-a-table.jpg",
+        "https://res.cloudinary.com/dwapqaaya/image/upload/v1737038647/samples/coffee.jpg",
+      ],
+      category: ["Antiques", "Vases"],
+      createdAt: new Date("2025-09-05T10:00:00Z"),
+      updatedAt: new Date("2025-09-20T10:00:00Z"),
+    },
+    // Add more dummy auctions as needed
   ];
 
   const categories = [
