@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Header from "@/components/Header";
 import FeatureAuction from "@/components/FeatureAuction";
-import { AuctionInterface } from "@/types/AuctionInterface";
+import { AuctionInterface } from "@/types/Auction";
 import wp from "@/media/images/wallpaper1.jpg";
 
 export default function Home() {

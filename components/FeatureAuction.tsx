@@ -3,10 +3,10 @@ import { ChevronRight, Timer } from "lucide-react";
 import React from "react";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
-import { AuctionInterface } from "@/types/AuctionInterface";
+import { Auction } from "@/types/Auction";
 
 interface FeatureAuctionProps {
-  featuredAuctions: AuctionInterface[];
+  featuredAuctions: Auction[];
 }
 
 const FeatureAuction: React.FC<FeatureAuctionProps> = ({
