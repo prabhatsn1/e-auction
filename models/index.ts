@@ -1,7 +1,7 @@
-import { Schema, model, models, Document } from "mongoose";
+import { Schema, model, models, Document, Types } from "mongoose";
 
 // User Model
-interface IUser extends Document {
+export interface IUser extends Document {
   email: string;
   password: string;
   role: "ADMIN" | "SELLER" | "BIDDER";
@@ -31,10 +31,11 @@ const userSchema = new Schema<IUser>(
 );
 
 // Auction Model
-interface IAuction extends Document {
+export interface IAuction extends Document {
+  _id: Types.ObjectId;
   title: string;
   description: string;
-  sellerId: Schema.Types.ObjectId;
+  sellerId: IUser;
   startingPrice: number;
   reservePrice?: number;
   currentPrice: number;
@@ -43,6 +44,8 @@ interface IAuction extends Document {
   status: "DRAFT" | "SCHEDULED" | "ACTIVE" | "ENDED" | "CANCELLED";
   images: string[];
   category: string[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const auctionSchema = new Schema<IAuction>(
