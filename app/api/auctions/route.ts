@@ -18,6 +18,18 @@ const QuerySchema = z.object({
   sellerId: z.string().optional(),
 });
 
+
+const CreateAuctionSchema = z.object({
+  title: z.string().min(1),
+  description: z.string().min(1),
+  startingPrice: z.number().positive(),
+  reservePrice: z.number().positive().optional(),
+  startTime: z.string().datetime(),
+  endTime: z.string().datetime(),
+  images: z.array(z.string()),
+  category: z.array(z.string()),
+});
+
 export async function GET(req: NextRequest) {
   try {
     await connectDB();
@@ -111,6 +123,40 @@ export async function GET(req: NextRequest) {
         status: "error",
         message: "Internal server error",
       },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    await connectDB();
+    const body = await req.json();
+    const validatedData = CreateAuctionSchema.parse(body);
+
+    const auction = await Auction.create({
+      ...validatedData,
+      sellerId: req.headers.get("userId"), // Assuming user ID is passed in header
+      currentPrice: validatedData.startingPrice,
+      status: "DRAFT",
+    });
+
+    return NextResponse.json(
+      {
+        status: "success",
+        data: auction,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { status: "error", errors: error.errors },
+        { status: 400 }
+      );
+    }
+    return NextResponse.json(
+      { status: "error", message: "Internal server error" },
       { status: 500 }
     );
   }
