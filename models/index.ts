@@ -71,24 +71,29 @@ const auctionSchema = new Schema<IAuction>(
 
 // Bid Model
 interface IBid extends Document {
-  auctionId: Schema.Types.ObjectId;
-  bidderId: Schema.Types.ObjectId;
+  _id: Types.ObjectId;
+  auctionId: Types.ObjectId;
+  bidderId: Types.ObjectId;
   amount: number;
   maxAmount?: number;
   status: "ACTIVE" | "OUTBID" | "WINNING";
+  automaticBidding: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const bidSchema = new Schema<IBid>(
+const bidSchema = new Schema(
   {
     auctionId: { type: Schema.Types.ObjectId, ref: "Auction", required: true },
     bidderId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     amount: { type: Number, required: true },
-    maxAmount: Number,
+    maxAmount: { type: Number },
     status: {
       type: String,
       enum: ["ACTIVE", "OUTBID", "WINNING"],
       required: true,
     },
+    automaticBidding: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

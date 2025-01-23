@@ -6,4 +6,5 @@ export interface Bid {
   maxAmount?: number; // for proxy bidding
   status: "ACTIVE" | "OUTBID" | "WINNING";
   createdAt: Date;
+  automaticBidding: boolean;
 }
