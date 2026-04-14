@@ -3,10 +3,7 @@ import { verify } from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
-export const authenticateToken = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+export const authenticateToken = async (req: NextApiRequest, res: NextApiResponse) => {
   const token = req.cookies.token;
 
   if (!token) {

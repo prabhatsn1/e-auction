@@ -100,6 +100,5 @@ const bidSchema = new Schema(
 
 // Export models
 export const User = models.User || model<IUser>("User", userSchema);
-export const Auction =
-  models.Auction || model<IAuction>("Auction", auctionSchema);
+export const Auction = models.Auction || model<IAuction>("Auction", auctionSchema);
 export const Bid = models.Bid || model<IBid>("Bid", bidSchema);

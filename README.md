@@ -9,6 +9,7 @@ A premium, full-stack online auction platform built with Next.js 15, TypeScript,
 ## ✨ Features
 
 ### 🎨 **Modern UI/UX**
+
 - Clean, minimal design with premium feel
 - Smooth animations with Framer Motion
 - Fully responsive across all devices
@@ -16,6 +17,7 @@ A premium, full-stack online auction platform built with Next.js 15, TypeScript,
 - Dark mode ready
 
 ### 🔥 **Core Functionality**
+
 - **Real-time Bidding** - Live auction updates
 - **User Authentication** - Secure login/register
 - **Seller Dashboard** - Manage listings and sales
@@ -25,6 +27,7 @@ A premium, full-stack online auction platform built with Next.js 15, TypeScript,
 - **Email Notifications** - Bid alerts and updates
 
 ### 🛡️ **Security & Performance**
+
 - JWT authentication
 - Input validation & sanitization
 - CSRF protection
@@ -36,39 +39,46 @@ A premium, full-stack online auction platform built with Next.js 15, TypeScript,
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - MongoDB
 - Cloudinary account (for image uploads)
 
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone https://github.com/yourusername/e-auction.git
 cd e-auction
 ```
 
 2. **Install dependencies**
+
 ```bash
 npm install
 ```
 
 3. **Set up environment variables**
+
 ```bash
 cp .env.example .env
 ```
+
 Edit `.env` with your credentials:
+
 - MongoDB connection string
 - JWT secret
 - Cloudinary credentials
 
 4. **Run development server**
+
 ```bash
 npm run dev
 ```
 
 5. **Open your browser**
-Navigate to [http://localhost:3000](http://localhost:3000)
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 📁 Project Structure
 
@@ -109,6 +119,7 @@ e-auction/
 ## 🎨 Tech Stack
 
 ### Frontend
+
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
@@ -117,12 +128,14 @@ e-auction/
 - **Icons**: Lucide React
 
 ### Backend
+
 - **Database**: MongoDB + Mongoose
 - **Authentication**: JWT + bcrypt
 - **File Upload**: Cloudinary
 - **API**: Next.js API Routes
 
 ### DevOps & Tools
+
 - **Deployment**: Vercel
 - **Version Control**: Git
 - **Package Manager**: npm
@@ -130,36 +143,41 @@ e-auction/
 
 ## 📄 Available Pages
 
-| Page | Route | Description |
-|------|-------|-------------|
-| Home | `/` | Landing page with featured auctions |
-| Auctions | `/auctions` | Browse all live auctions |
-| Auction Detail | `/auctions/[id]` | View & bid on specific auction |
-| Create Auction | `/auctions/create` | List new item for auction |
-| Dashboard | `/dashboard` | User dashboard (bids, watchlist, sales) |
-| About | `/about` | Company information |
-| How It Works | `/how-it-works` | Platform guide |
-| FAQ | `/faq` | Frequently asked questions |
-| Contact | `/contact` | Contact form |
-| Terms | `/terms` | Terms of service |
-| Privacy | `/privacy` | Privacy policy |
-| Login | `/login` | User authentication |
-| Register | `/register` | New user signup |
+| Page           | Route              | Description                             |
+| -------------- | ------------------ | --------------------------------------- |
+| Home           | `/`                | Landing page with featured auctions     |
+| Auctions       | `/auctions`        | Browse all live auctions                |
+| Auction Detail | `/auctions/[id]`   | View & bid on specific auction          |
+| Create Auction | `/auctions/create` | List new item for auction               |
+| Dashboard      | `/dashboard`       | User dashboard (bids, watchlist, sales) |
+| About          | `/about`           | Company information                     |
+| How It Works   | `/how-it-works`    | Platform guide                          |
+| FAQ            | `/faq`             | Frequently asked questions              |
+| Contact        | `/contact`         | Contact form                            |
+| Terms          | `/terms`           | Terms of service                        |
+| Privacy        | `/privacy`         | Privacy policy                          |
+| Login          | `/login`           | User authentication                     |
+| Register       | `/register`        | New user signup                         |
 
 ## 🔧 Configuration
 
 ### Environment Variables
+
 See `.env.example` for required variables.
 
 ### Tailwind Configuration
+
 Custom design tokens in `tailwind.config.ts`:
+
 - Color palette
 - Typography (Inter + Syne fonts)
 - Custom animations
 - Gradient utilities
 
 ### Next.js Configuration
+
 Security headers and optimizations in `next.config.ts`:
+
 - Image optimization (AVIF, WebP)
 - Security headers (CSP, X-Frame-Options)
 - Compression enabled
@@ -167,6 +185,7 @@ Security headers and optimizations in `next.config.ts`:
 ## 🧪 Development
 
 ### Scripts
+
 ```bash
 npm run dev      # Start development server
 npm run build    # Build for production
@@ -175,6 +194,7 @@ npm run lint     # Run ESLint
 ```
 
 ### Code Quality
+
 - TypeScript for type safety
 - ESLint for code linting
 - Prettier for formatting (recommended)
@@ -183,12 +203,14 @@ npm run lint     # Run ESLint
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 1. Push code to GitHub
 2. Import project in Vercel
 3. Add environment variables
 4. Deploy
 
 ### Manual Deployment
+
 ```bash
 npm run build
 npm run start
@@ -226,6 +248,7 @@ npm run start
 ## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
+
 1. Fork the repository
 2. Create a feature branch
 3. Commit your changes

@@ -10,12 +10,7 @@ interface FadeInProps {
   direction?: "up" | "down" | "left" | "right" | "none";
 }
 
-export const FadeIn = ({
-  children,
-  className,
-  delay = 0,
-  direction = "up",
-}: FadeInProps) => {
+export const FadeIn = ({ children, className, delay = 0, direction = "up" }: FadeInProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 

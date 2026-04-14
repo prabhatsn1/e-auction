@@ -32,21 +32,22 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary/50 border-t border-border" role="contentinfo">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+    <footer className="border-t border-border bg-secondary/50" role="contentinfo">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <div className="mb-12 grid grid-cols-2 gap-10 md:grid-cols-4">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center">
-                <Gavel className="w-4 h-4 text-white" />
+            <Link href="/" className="mb-4 flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600">
+                <Gavel className="h-4 w-4 text-white" />
               </div>
-              <span className="font-display font-bold text-lg">
+              <span className="font-display text-lg font-bold">
                 E<span className="gradient-text">Auction</span>
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              The world&apos;s most trusted platform for buying and selling unique items through live auctions.
+            <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+              The world&apos;s most trusted platform for buying and selling unique items through
+              live auctions.
             </p>
             <div className="flex gap-3">
               {socials.map(({ icon: Icon, href, label }) => (
@@ -55,9 +56,9 @@ export default function Footer() {
                   href={href}
                   aria-label={label}
                   whileHover={{ y: -2, scale: 1.1 }}
-                  className="w-9 h-9 rounded-full bg-white border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors shadow-sm"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-muted-foreground shadow-sm transition-colors hover:border-primary/40 hover:text-foreground"
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="h-4 w-4" />
                 </motion.a>
               ))}
             </div>
@@ -66,13 +67,13 @@ export default function Footer() {
           {/* Links */}
           {Object.entries(footerLinks).map(([group, links]) => (
             <div key={group}>
-              <h3 className="font-semibold text-sm mb-4">{group}</h3>
+              <h3 className="mb-4 text-sm font-semibold">{group}</h3>
               <ul className="space-y-2.5">
                 {links.map(({ label, href }) => (
                   <li key={label}>
                     <Link
                       href={href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {label}
                     </Link>
@@ -83,7 +84,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row">
           <p>© {new Date().getFullYear()} E-Auction. All rights reserved.</p>
           <p>Built with ❤️ using Next.js &amp; Tailwind CSS</p>
         </div>

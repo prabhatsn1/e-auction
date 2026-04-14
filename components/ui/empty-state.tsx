@@ -22,13 +22,13 @@ export const EmptyState = ({
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    className="flex flex-col items-center justify-center py-16 px-4 text-center"
+    className="flex flex-col items-center justify-center px-4 py-16 text-center"
   >
-    <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center mb-4">
-      <Icon className="w-8 h-8 text-muted-foreground" />
+    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary">
+      <Icon className="h-8 w-8 text-muted-foreground" />
     </div>
-    <h3 className="font-semibold text-lg mb-2">{title}</h3>
-    <p className="text-sm text-muted-foreground max-w-md mb-6">{description}</p>
+    <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+    <p className="mb-6 max-w-md text-sm text-muted-foreground">{description}</p>
     {actionLabel && onAction && (
       <Button onClick={onAction} className="rounded-xl">
         {actionLabel}

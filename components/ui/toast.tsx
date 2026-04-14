@@ -50,7 +50,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
+      <div className="pointer-events-none fixed bottom-4 right-4 z-50 flex flex-col gap-2">
         <AnimatePresence>
           {toasts.map((toast) => (
             <motion.div
@@ -59,17 +59,17 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, x: 100, scale: 0.95 }}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg pointer-events-auto min-w-[300px]",
+                "pointer-events-auto flex min-w-[300px] items-center gap-3 rounded-xl px-4 py-3 shadow-lg",
                 typeStyles[toast.type]
               )}
             >
               <p className="flex-1 text-sm font-medium">{toast.message}</p>
               <button
                 onClick={() => removeToast(toast.id)}
-                className="shrink-0 hover:opacity-70 transition-opacity"
+                className="shrink-0 transition-opacity hover:opacity-70"
                 aria-label="Close"
               >
-                <X className="w-4 h-4" />
+                <X className="h-4 w-4" />
               </button>
             </motion.div>
           ))}

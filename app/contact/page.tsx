@@ -8,7 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -25,23 +31,23 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
-      <main className="pt-20 pb-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <FadeIn className="text-center mb-12">
-            <h1 className="font-display text-5xl font-bold tracking-tight mb-4">
+
+      <main className="pb-20 pt-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <FadeIn className="mb-12 text-center">
+            <h1 className="mb-4 font-display text-5xl font-bold tracking-tight">
               Get in <span className="gradient-text">Touch</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
               Have questions? We're here to help. Reach out and we'll respond within 24 hours.
             </p>
           </FadeIn>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid gap-12 lg:grid-cols-2">
             {/* Contact Form */}
             <FadeIn direction="right">
-              <div className="p-8 rounded-2xl bg-white border border-border shadow-sm">
-                <h2 className="font-display text-2xl font-bold mb-6">Send us a message</h2>
+              <div className="rounded-2xl border border-border bg-white p-8 shadow-sm">
+                <h2 className="mb-6 font-display text-2xl font-bold">Send us a message</h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
                     <Label htmlFor="name">Name</Label>
@@ -66,7 +72,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <Label htmlFor="category">Category</Label>
-                    <Select value={formData.category} onValueChange={(v) => setFormData({ ...formData, category: v })}>
+                    <Select
+                      value={formData.category}
+                      onValueChange={(v) => setFormData({ ...formData, category: v })}
+                    >
                       <SelectTrigger className="mt-1.5">
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
@@ -91,8 +100,8 @@ export default function ContactPage() {
                     />
                   </div>
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button type="submit" className="w-full bg-primary text-white rounded-xl">
-                      <Send className="w-4 h-4 mr-2" />
+                    <Button type="submit" className="w-full rounded-xl bg-primary text-white">
+                      <Send className="mr-2 h-4 w-4" />
                       Send Message
                     </Button>
                   </motion.div>
@@ -100,7 +109,7 @@ export default function ContactPage() {
                     <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-sm text-emerald-600 font-medium text-center"
+                      className="text-center text-sm font-medium text-emerald-600"
                     >
                       ✓ Message sent! We'll get back to you soon.
                     </motion.p>
@@ -112,39 +121,39 @@ export default function ContactPage() {
             {/* Contact Info */}
             <FadeIn direction="left" delay={0.1}>
               <div className="space-y-6">
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-50 to-indigo-50 border border-violet-200">
+                <div className="rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-indigo-50 p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-violet-600 flex items-center justify-center shrink-0">
-                      <Mail className="w-6 h-6 text-white" />
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-violet-600">
+                      <Mail className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1">Email</h3>
+                      <h3 className="mb-1 font-semibold">Email</h3>
                       <p className="text-sm text-muted-foreground">support@e-auction.com</p>
                       <p className="text-sm text-muted-foreground">sales@e-auction.com</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200">
+                <div className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-cyan-50 p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center shrink-0">
-                      <Phone className="w-6 h-6 text-white" />
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600">
+                      <Phone className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1">Phone</h3>
+                      <h3 className="mb-1 font-semibold">Phone</h3>
                       <p className="text-sm text-muted-foreground">+1 (555) 123-4567</p>
-                      <p className="text-xs text-muted-foreground mt-1">Mon-Fri, 9am-6pm EST</p>
+                      <p className="mt-1 text-xs text-muted-foreground">Mon-Fri, 9am-6pm EST</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200">
+                <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0">
-                      <MapPin className="w-6 h-6 text-white" />
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-600">
+                      <MapPin className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1">Office</h3>
+                      <h3 className="mb-1 font-semibold">Office</h3>
                       <p className="text-sm text-muted-foreground">123 Auction Street</p>
                       <p className="text-sm text-muted-foreground">San Francisco, CA 94102</p>
                     </div>

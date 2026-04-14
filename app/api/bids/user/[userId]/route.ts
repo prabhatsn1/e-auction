@@ -2,10 +2,7 @@ import connectDB from "@/lib/mongodb";
 import { Bid } from "@/models";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+export async function GET(req: NextRequest, { params }: { params: { userId: string } }) {
   try {
     await connectDB();
 

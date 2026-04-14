@@ -21,19 +21,12 @@ export async function POST(req: NextRequest) {
     // Get auction details
     const auction = await Auction.findById(validatedData.auctionId);
     if (!auction) {
-      return NextResponse.json(
-        { status: "error", message: "Auction not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ status: "error", message: "Auction not found" }, { status: 404 });
     }
 
     // Validate auction status
     const now = new Date();
-    if (
-      now < auction.startTime ||
-      now > auction.endTime ||
-      auction.status !== "ACTIVE"
-    ) {
+    if (now < auction.startTime || now > auction.endTime || auction.status !== "ACTIVE") {
       return NextResponse.json(
         {
           status: "error",
@@ -83,16 +76,10 @@ export async function POST(req: NextRequest) {
       currentPrice: validatedData.amount,
     });
 
-    return NextResponse.json(
-      { status: "success", data: newBid },
-      { status: 201 }
-    );
+    return NextResponse.json({ status: "success", data: newBid }, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { status: "error", errors: error.errors },
-        { status: 400 }
-      );
+      return NextResponse.json({ status: "error", errors: error.errors }, { status: 400 });
     }
     return NextResponse.json(
       { status: "error", message: "Internal server error" },

@@ -39,24 +39,24 @@ export const Header = () => {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/80 backdrop-blur-xl border-b border-border/60 shadow-sm"
+            ? "border-b border-border/60 bg-white/80 shadow-sm backdrop-blur-xl"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Logo */}
             <Logo />
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
+            <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent transition-colors"
+                  className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
                   {link.label}
                 </Link>
@@ -64,27 +64,31 @@ export const Header = () => {
             </nav>
 
             {/* Search */}
-            <div className="hidden md:flex flex-1 max-w-xs">
+            <div className="hidden max-w-xs flex-1 md:flex">
               <SearchBar />
             </div>
 
             {/* Right actions */}
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="relative hidden md:flex" aria-label="Notifications">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="relative hidden md:flex"
+                aria-label="Notifications"
+              >
                 <Bell className="h-5 w-5" />
-                <Badge className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 flex items-center justify-center text-[10px]">
+                <Badge className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px]">
                   3
                 </Badge>
               </Button>
               <div className="hidden md:block">
-                <UserMenu
-                  user={user}
-                  onLogin={() => {}}
-                  onLogout={() => {}}
-                />
+                <UserMenu user={user} onLogin={() => {}} onLogout={() => {}} />
               </div>
               <Link href="/auctions/create">
-                <Button size="sm" className="hidden md:flex bg-primary hover:bg-primary/90 text-white rounded-full px-5 shadow-md shadow-primary/25">
+                <Button
+                  size="sm"
+                  className="hidden rounded-full bg-primary px-5 text-white shadow-md shadow-primary/25 hover:bg-primary/90 md:flex"
+                >
                   + List Item
                 </Button>
               </Link>
@@ -111,22 +115,22 @@ export const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-16 z-40 bg-white/95 backdrop-blur-xl border-b border-border shadow-lg md:hidden"
+            className="fixed inset-x-0 top-16 z-40 border-b border-border bg-white/95 shadow-lg backdrop-blur-xl md:hidden"
           >
-            <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-2">
+            <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4">
               <SearchBar />
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="px-4 py-3 text-sm font-medium rounded-lg hover:bg-accent transition-colors"
+                  className="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-accent"
                 >
                   {link.label}
                 </Link>
               ))}
               <Link href="/auctions/create" onClick={() => setMobileOpen(false)}>
-                <Button className="w-full mt-2 bg-primary text-white rounded-full">
+                <Button className="mt-2 w-full rounded-full bg-primary text-white">
                   + List Item
                 </Button>
               </Link>

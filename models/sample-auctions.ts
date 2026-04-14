@@ -20,11 +20,7 @@ export const sampleAuctions = [
     startTime: new Date("2025-01-25T10:00:00Z"),
     endTime: new Date("2025-02-25T10:00:00Z"),
     status: "ACTIVE",
-    images: [
-      "rolex-submariner-1.jpg",
-      "rolex-submariner-2.jpg",
-      "rolex-submariner-3.jpg",
-    ],
+    images: ["rolex-submariner-1.jpg", "rolex-submariner-2.jpg", "rolex-submariner-3.jpg"],
     category: ["Luxury", "Watches", "Vintage"],
   },
   {
@@ -126,11 +122,7 @@ export const sampleAuctions = [
     startTime: new Date("2025-01-18T16:00:00Z"),
     endTime: new Date("2025-02-18T16:00:00Z"),
     status: "ENDED",
-    images: [
-      "gibson-les-paul-1.jpg",
-      "gibson-les-paul-2.jpg",
-      "gibson-les-paul-3.jpg",
-    ],
+    images: ["gibson-les-paul-1.jpg", "gibson-les-paul-2.jpg", "gibson-les-paul-3.jpg"],
     category: ["Musical Instruments", "Vintage", "Collectibles"],
   },
   {

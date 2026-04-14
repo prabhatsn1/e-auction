@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 
 const connectionString = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@auctioncluster.v0p9h.mongodb.net/?retryWrites=true&w=majority&appName=auctionCluster`;
 if (!connectionString) {
-  console.log(
-    "please define the MONGODB_URI environment variable inside .env.local"
-  );
+  console.log("please define the MONGODB_URI environment variable inside .env.local");
   throw new Error("Please define the MONGODB_URI environment variable");
 }
 

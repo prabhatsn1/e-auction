@@ -16,11 +16,12 @@ This project uses a **free, client-side mock database** using browser `localStor
 ## How It Works
 
 ### Storage Keys
+
 ```typescript
-AUCTIONS: "e-auction-auctions"
-USERS: "e-auction-users"
-BIDS: "e-auction-bids"
-WATCHLIST: "e-auction-watchlist"
+AUCTIONS: "e-auction-auctions";
+USERS: "e-auction-users";
+BIDS: "e-auction-bids";
+WATCHLIST: "e-auction-watchlist";
 ```
 
 ### Sample Data Included
@@ -35,17 +36,20 @@ WATCHLIST: "e-auction-watchlist"
 ### Auctions
 
 #### Get All Auctions
+
 ```
 GET /api/auctions
 Query params: ?category=watches&status=ACTIVE&q=vintage
 ```
 
 #### Get Single Auction
+
 ```
 GET /api/auctions/[id]
 ```
 
 #### Create Auction
+
 ```
 POST /api/auctions
 Body: {
@@ -60,12 +64,14 @@ Body: {
 ```
 
 #### Update Auction
+
 ```
 PUT /api/auctions/[id]
 Body: Partial<Auction>
 ```
 
 #### Delete Auction
+
 ```
 DELETE /api/auctions/[id]
 ```
@@ -73,6 +79,7 @@ DELETE /api/auctions/[id]
 ### Bids
 
 #### Place Bid
+
 ```
 POST /api/auctions/[id]/bid
 Body: { bidAmount: number }
@@ -81,25 +88,28 @@ Body: { bidAmount: number }
 ## Usage in Components
 
 ### Fetching Auctions
+
 ```typescript
-const response = await fetch('/api/auctions');
+const response = await fetch("/api/auctions");
 const { data } = await response.json();
 ```
 
 ### Creating Auction
+
 ```typescript
-const response = await fetch('/api/auctions', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const response = await fetch("/api/auctions", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify(auctionData),
 });
 ```
 
 ### Placing Bid
+
 ```typescript
 const response = await fetch(`/api/auctions/${id}/bid`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ bidAmount: 10000 }),
 });
 ```
@@ -109,28 +119,28 @@ const response = await fetch(`/api/auctions/${id}/bid`, {
 You can also use the mock database directly:
 
 ```typescript
-import { mockDB } from '@/lib/mock-db';
+import { mockDB } from "@/lib/mock-db";
 
 // Get all auctions
 const auctions = mockDB.auctions.getAll();
 
 // Search auctions
-const results = mockDB.auctions.search('vintage');
+const results = mockDB.auctions.search("vintage");
 
 // Filter by category
-const watches = mockDB.auctions.filterByCategory('watches');
+const watches = mockDB.auctions.filterByCategory("watches");
 
 // Create auction
 const newAuction = mockDB.auctions.create({
-  title: 'New Item',
+  title: "New Item",
   // ... other fields
 });
 
 // Update auction
-mockDB.auctions.update('auction-id', { currentPrice: 15000 });
+mockDB.auctions.update("auction-id", { currentPrice: 15000 });
 
 // Delete auction
-mockDB.auctions.delete('auction-id');
+mockDB.auctions.delete("auction-id");
 ```
 
 ## Data Persistence
@@ -143,15 +153,17 @@ mockDB.auctions.delete('auction-id');
 ## Clearing Data
 
 ### From Browser Console
+
 ```javascript
 localStorage.clear();
 // or
-localStorage.removeItem('e-auction-auctions');
+localStorage.removeItem("e-auction-auctions");
 ```
 
 ### Programmatically
+
 ```typescript
-import { mockDB } from '@/lib/mock-db';
+import { mockDB } from "@/lib/mock-db";
 mockDB.clearAll();
 ```
 
@@ -167,23 +179,27 @@ mockDB.clearAll();
 When ready for production, replace `mockDB` calls with real database:
 
 ### Option 1: MongoDB Atlas (Free Tier)
+
 - 512MB storage free
 - Shared cluster
 - Sign up at: https://www.mongodb.com/cloud/atlas
 
 ### Option 2: Supabase (Free Tier)
+
 - PostgreSQL database
 - 500MB storage free
 - Real-time subscriptions
 - Sign up at: https://supabase.com
 
 ### Option 3: PlanetScale (Free Tier)
+
 - MySQL database
 - 5GB storage free
 - Serverless
 - Sign up at: https://planetscale.com
 
 ### Option 4: Firebase Firestore (Free Tier)
+
 - NoSQL database
 - 1GB storage free
 - Real-time updates
@@ -192,6 +208,7 @@ When ready for production, replace `mockDB` calls with real database:
 ## Testing
 
 The mock database is perfect for:
+
 - ✅ Development
 - ✅ Demos
 - ✅ Prototyping
@@ -208,6 +225,7 @@ The mock database is perfect for:
 ## Support
 
 For issues or questions about the mock database, check:
+
 - `lib/mock-db.ts` - Database implementation
 - `app/api/auctions/route.ts` - API examples
 - `types/Auction.ts` - Data structure

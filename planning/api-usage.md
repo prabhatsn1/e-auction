@@ -80,10 +80,11 @@ Common use cases:
 Here's how to use each API endpoint with examples:
 
 1. Register a new user:
+
 ```typescript
-const response = await fetch('/api/auth/register', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const response = await fetch("/api/auth/register", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     email: "user@example.com",
     password: "securepassword123",
@@ -91,9 +92,9 @@ const response = await fetch('/api/auth/register', {
     profile: {
       name: "John Doe",
       address: "123 Main St",
-      phone: "+1234567890"
-    }
-  })
+      phone: "+1234567890",
+    },
+  }),
 });
 
 const data = await response.json();
@@ -101,14 +102,15 @@ const data = await response.json();
 ```
 
 2. Login:
+
 ```typescript
-const response = await fetch('/api/auth/login', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const response = await fetch("/api/auth/login", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     email: "user@example.com",
-    password: "securepassword123"
-  })
+    password: "securepassword123",
+  }),
 });
 
 const data = await response.json();
@@ -117,14 +119,16 @@ const data = await response.json();
 ```
 
 3. Logout:
+
 ```typescript
-await fetch('/api/auth/logout', {
-  method: 'POST'
+await fetch("/api/auth/logout", {
+  method: "POST",
 });
 // Clears the auth cookie
 ```
 
 4. Verify Email:
+
 ```typescript
 // Usually accessed via email link
 window.location.href = `/api/auth/verify-email?token=${verificationToken}`;
@@ -133,33 +137,33 @@ await fetch(`/api/auth/verify-email?token=${verificationToken}`);
 ```
 
 5. Reset Password:
+
 ```typescript
-const response = await fetch('/api/auth/reset-password', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const response = await fetch("/api/auth/reset-password", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     token: "reset-token-from-email",
-    password: "newpassword123"
-  })
+    password: "newpassword123",
+  }),
 });
 ```
 
 Protected API route example:
+
 ```typescript
 // pages/api/protected-route.ts
-import { authenticateToken } from '@/lib/auth';
+import { authenticateToken } from "@/lib/auth";
 
 export default async function handler(req, res) {
   try {
     const userId = await authenticateToken(req, res);
     // User is authenticated, proceed with protected logic
   } catch (error) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 }
 ```
-
-
 
 ```typescript
 // middleware.ts
@@ -233,7 +237,7 @@ import { useEffect } from 'react'
 
 export function useAuth() {
   const router = useRouter()
-  
+
   useEffect(() => {
     const checkAuth = async () => {
       const response = await fetch('/api/auth/check')
@@ -260,6 +264,7 @@ export default function Dashboard() {
 Usage:
 
 1. Protected Pages:
+
 ```typescript
 // Any page that needs auth
 import { useAuth } from '@/hooks/useAuth'
@@ -271,13 +276,14 @@ export default function ProtectedPage() {
 ```
 
 2. Protected API:
+
 ```typescript
-import { withAuth } from '@/utils/withAuth'
+import { withAuth } from "@/utils/withAuth";
 
 export default withAuth(function handler(req, res) {
   // Access authenticated userId via req.userId
   // Only authenticated users can reach this code
-})
+});
 ```
 
 Add route patterns to `protectedRoutes` in middleware.ts to protect additional pages.

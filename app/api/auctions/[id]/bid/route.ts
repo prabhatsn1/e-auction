@@ -2,10 +2,7 @@ import { NextRequest } from "next/server";
 import { mockDB } from "@/lib/mock-db";
 import { successResponse, errorHandler, errors } from "@/lib/api-error";
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
     const { bidAmount } = body;

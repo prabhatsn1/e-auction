@@ -13,10 +13,12 @@ interface FeatureAuctionProps {
 
 const FeatureAuction: React.FC<FeatureAuctionProps> = ({ featuredAuctions }) => (
   <section className="py-20" aria-labelledby="featured-heading">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6">
-      <FadeIn className="flex justify-between items-end mb-10">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <FadeIn className="mb-10 flex items-end justify-between">
         <div>
-          <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-2">Live Now</p>
+          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">
+            Live Now
+          </p>
           <h2 id="featured-heading" className="font-display text-4xl font-bold tracking-tight">
             Featured Auctions
           </h2>
@@ -24,7 +26,7 @@ const FeatureAuction: React.FC<FeatureAuctionProps> = ({ featuredAuctions }) => 
         <Link href="/auctions">
           <motion.span
             whileHover={{ x: 4 }}
-            className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80"
           >
             View All <ChevronRight className="h-4 w-4" />
           </motion.span>
@@ -32,7 +34,7 @@ const FeatureAuction: React.FC<FeatureAuctionProps> = ({ featuredAuctions }) => 
       </FadeIn>
 
       <StaggerContainer
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         staggerDelay={0.1}
       >
         {featuredAuctions.map((auction) => (

@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const AuctionUpdatePage: React.FC = () => {
   const router = useRouter();
-  const id = typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : '';
+  const id = typeof window !== "undefined" ? window.location.pathname.split("/")[2] : "";
   const [auction, setAuction] = useState({
     title: "",
     description: "",
@@ -43,9 +43,7 @@ const AuctionUpdatePage: React.FC = () => {
     }
   }, [id]);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setAuction((prev) => ({ ...prev, [name]: value }));
   };
@@ -68,17 +66,12 @@ const AuctionUpdatePage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-50">
-      <h1 className="text-2xl font-bold mb-6">Update Auction</h1>
+    <div className="mx-auto max-w-2xl bg-gray-50 p-6">
+      <h1 className="mb-6 text-2xl font-bold">Update Auction</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label>Title</label>
-          <Input
-            name="title"
-            value={auction.title}
-            onChange={handleInputChange}
-            required
-          />
+          <Input name="title" value={auction.title} onChange={handleInputChange} required />
         </div>
 
         <div>
@@ -91,7 +84,7 @@ const AuctionUpdatePage: React.FC = () => {
           />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label>Starting Price</label>
             <Input
@@ -114,7 +107,7 @@ const AuctionUpdatePage: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label>Start Time</label>
             <Input
@@ -142,9 +135,7 @@ const AuctionUpdatePage: React.FC = () => {
           <label>Status</label>
           <Select
             value={auction.status}
-            onValueChange={(value) =>
-              setAuction((prev) => ({ ...prev, status: value }))
-            }
+            onValueChange={(value) => setAuction((prev) => ({ ...prev, status: value }))}
           >
             <SelectTrigger>
               <SelectValue placeholder="Select status" />

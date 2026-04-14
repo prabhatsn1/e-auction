@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Syne } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -13,7 +15,17 @@ export const metadata: Metadata = {
   },
   description:
     "Discover and bid on unique, verified items from trusted sellers worldwide. Real-time auctions for art, collectibles, watches, and more.",
-  keywords: ["online auction", "bid", "collectibles", "art", "watches", "antiques", "live bidding", "buy online", "sell items"],
+  keywords: [
+    "online auction",
+    "bid",
+    "collectibles",
+    "art",
+    "watches",
+    "antiques",
+    "live bidding",
+    "buy online",
+    "sell items",
+  ],
   authors: [{ name: "E-Auction" }],
   creator: "E-Auction",
   publisher: "E-Auction",
@@ -72,7 +84,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

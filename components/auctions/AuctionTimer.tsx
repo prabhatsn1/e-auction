@@ -30,8 +30,12 @@ export const AuctionTimer = ({ endTime, compact = true }: AuctionTimerProps) => 
     const { days, hours, minutes, seconds } = timeLeft;
     const isUrgent = days === 0 && hours < 2;
     return (
-      <span className={`font-mono font-semibold text-xs ${isUrgent ? "text-red-500" : "text-foreground"}`}>
-        {days > 0 ? `${days}d ` : ""}{String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+      <span
+        className={`font-mono text-xs font-semibold ${isUrgent ? "text-red-500" : "text-foreground"}`}
+      >
+        {days > 0 ? `${days}d ` : ""}
+        {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
+        {String(seconds).padStart(2, "0")}
       </span>
     );
   }
@@ -46,8 +50,8 @@ export const AuctionTimer = ({ endTime, compact = true }: AuctionTimerProps) => 
   return (
     <div className="flex gap-2">
       {units.map(({ label, value }) => (
-        <div key={label} className="bg-accent rounded-lg px-2.5 py-1.5 text-center min-w-[44px]">
-          <span className="font-bold text-sm block">{String(value).padStart(2, "0")}</span>
+        <div key={label} className="min-w-[44px] rounded-lg bg-accent px-2.5 py-1.5 text-center">
+          <span className="block text-sm font-bold">{String(value).padStart(2, "0")}</span>
           <span className="text-[10px] text-muted-foreground">{label}</span>
         </div>
       ))}

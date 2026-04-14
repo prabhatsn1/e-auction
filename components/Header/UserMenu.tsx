@@ -9,15 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  User,
-  Settings,
-  LogOut,
-  Bell,
-  Heart,
-  Package,
-  Gavel,
-} from "lucide-react";
+import { User, Settings, LogOut, Bell, Heart, Package, Gavel } from "lucide-react";
 
 interface UserMenuProps {
   user?: {

@@ -2,10 +2,7 @@ import connectDB from "@/lib/mongodb";
 import { Bid } from "@/models";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { auctionId: string } }
-) {
+export async function GET(req: NextRequest, { params }: { params: { auctionId: string } }) {
   try {
     await connectDB();
 
@@ -17,8 +14,7 @@ export async function GET(
     const summary = {
       totalBids: bids.length,
       highestBid: bids[0]?.amount || 0,
-      uniqueBidders: new Set(bids.map((bid) => bid.bidderId._id.toString()))
-        .size,
+      uniqueBidders: new Set(bids.map((bid) => bid.bidderId._id.toString())).size,
     };
 
     return NextResponse.json({

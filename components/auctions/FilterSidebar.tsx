@@ -14,7 +14,7 @@ export const FilterSidebar = ({ onFilterChange }: FilterSidebarProps) => {
     <Card className="w-72">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <SlidersHorizontal className="w-5 h-5" />
+          <SlidersHorizontal className="h-5 w-5" />
           Filters
         </CardTitle>
       </CardHeader>
@@ -38,7 +38,7 @@ export const FilterSidebar = ({ onFilterChange }: FilterSidebarProps) => {
               className="mt-2"
               onValueChange={(value) => onFilterChange({ priceRange: value })}
             />
-            <div className="flex justify-between mt-2">
+            <div className="mt-2 flex justify-between">
               <span className="text-sm text-muted-foreground">$0</span>
               <span className="text-sm text-muted-foreground">$10,000</span>
             </div>
@@ -47,7 +47,7 @@ export const FilterSidebar = ({ onFilterChange }: FilterSidebarProps) => {
 
         <div>
           <Label className="text-sm font-medium">Status</Label>
-          <div className="space-y-2 mt-2">
+          <div className="mt-2 space-y-2">
             {["ACTIVE", "SCHEDULED", "ENDED"].map((status) => (
               <div key={status} className="flex items-center space-x-2">
                 <Checkbox id={status} />

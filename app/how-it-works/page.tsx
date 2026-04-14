@@ -3,7 +3,16 @@
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
-import { Search, Gavel, CreditCard, Package, UserPlus, Camera, Clock, DollarSign } from "lucide-react";
+import {
+  Search,
+  Gavel,
+  CreditCard,
+  Package,
+  UserPlus,
+  Camera,
+  Clock,
+  DollarSign,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -25,17 +34,18 @@ export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-20">
         {/* Hero */}
-        <section className="py-20 bg-gradient-to-b from-secondary/40 to-background">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <section className="bg-gradient-to-b from-secondary/40 to-background py-20">
+          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
             <FadeIn>
-              <h1 className="font-display text-5xl font-bold tracking-tight mb-6">
+              <h1 className="mb-6 font-display text-5xl font-bold tracking-tight">
                 How <span className="gradient-text">E-Auction</span> Works
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Whether you're buying or selling, our platform makes auctions simple, secure, and transparent.
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                Whether you're buying or selling, our platform makes auctions simple, secure, and
+                transparent.
               </p>
             </FadeIn>
           </div>
@@ -43,38 +53,41 @@ export default function HowItWorksPage() {
 
         {/* For Buyers */}
         <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <FadeIn className="text-center mb-12">
-              <h2 className="font-display text-3xl font-bold mb-3">For Buyers</h2>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <FadeIn className="mb-12 text-center">
+              <h2 className="mb-3 font-display text-3xl font-bold">For Buyers</h2>
               <p className="text-muted-foreground">Start bidding in 4 simple steps</p>
             </FadeIn>
 
-            <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.1}>
+            <StaggerContainer
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+              staggerDelay={0.1}
+            >
               {buyerSteps.map((step, i) => (
                 <StaggerItem key={step.title}>
                   <motion.div
                     whileHover={{ y: -4 }}
-                    className="relative p-6 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all"
+                    className="relative rounded-2xl border border-border bg-white p-6 transition-all hover:border-primary/30 hover:shadow-lg"
                   >
-                    <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-white flex items-center justify-center font-bold text-sm">
+                    <div className="absolute -left-3 -top-3 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-sm font-bold text-white">
                       {i + 1}
                     </div>
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                      <step.icon className="w-6 h-6 text-primary" />
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+                      <step.icon className="h-6 w-6 text-primary" />
                     </div>
-                    <h3 className="font-semibold mb-2">{step.title}</h3>
+                    <h3 className="mb-2 font-semibold">{step.title}</h3>
                     <p className="text-sm text-muted-foreground">{step.desc}</p>
                   </motion.div>
                 </StaggerItem>
               ))}
             </StaggerContainer>
 
-            <FadeIn className="text-center mt-8">
+            <FadeIn className="mt-8 text-center">
               <Link href="/register">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-3 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold shadow-lg shadow-violet-500/30"
+                  className="rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-3 font-semibold text-white shadow-lg shadow-violet-500/30"
                 >
                   Start Bidding
                 </motion.button>
@@ -84,39 +97,42 @@ export default function HowItWorksPage() {
         </section>
 
         {/* For Sellers */}
-        <section className="py-20 bg-secondary/40">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <FadeIn className="text-center mb-12">
-              <h2 className="font-display text-3xl font-bold mb-3">For Sellers</h2>
+        <section className="bg-secondary/40 py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <FadeIn className="mb-12 text-center">
+              <h2 className="mb-3 font-display text-3xl font-bold">For Sellers</h2>
               <p className="text-muted-foreground">List your items in 4 easy steps</p>
             </FadeIn>
 
-            <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.1}>
+            <StaggerContainer
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+              staggerDelay={0.1}
+            >
               {sellerSteps.map((step, i) => (
                 <StaggerItem key={step.title}>
                   <motion.div
                     whileHover={{ y: -4 }}
-                    className="relative p-6 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all"
+                    className="relative rounded-2xl border border-border bg-white p-6 transition-all hover:border-primary/30 hover:shadow-lg"
                   >
-                    <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 text-white flex items-center justify-center font-bold text-sm">
+                    <div className="absolute -left-3 -top-3 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 text-sm font-bold text-white">
                       {i + 1}
                     </div>
-                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4">
-                      <step.icon className="w-6 h-6 text-emerald-600" />
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10">
+                      <step.icon className="h-6 w-6 text-emerald-600" />
                     </div>
-                    <h3 className="font-semibold mb-2">{step.title}</h3>
+                    <h3 className="mb-2 font-semibold">{step.title}</h3>
                     <p className="text-sm text-muted-foreground">{step.desc}</p>
                   </motion.div>
                 </StaggerItem>
               ))}
             </StaggerContainer>
 
-            <FadeIn className="text-center mt-8">
+            <FadeIn className="mt-8 text-center">
               <Link href="/auctions/create">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-500/30"
+                  className="rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 px-8 py-3 font-semibold text-white shadow-lg shadow-emerald-500/30"
                 >
                   Start Selling
                 </motion.button>
@@ -127,16 +143,16 @@ export default function HowItWorksPage() {
 
         {/* FAQ Preview */}
         <section className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
             <FadeIn>
-              <h2 className="font-display text-3xl font-bold mb-4">Still have questions?</h2>
-              <p className="text-muted-foreground mb-8">Check out our FAQ or contact support</p>
+              <h2 className="mb-4 font-display text-3xl font-bold">Still have questions?</h2>
+              <p className="mb-8 text-muted-foreground">Check out our FAQ or contact support</p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link href="/faq">
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-6 py-3 rounded-full bg-white border border-border font-semibold hover:bg-secondary transition-colors"
+                    className="rounded-full border border-border bg-white px-6 py-3 font-semibold transition-colors hover:bg-secondary"
                   >
                     View FAQ
                   </motion.button>
@@ -145,7 +161,7 @@ export default function HowItWorksPage() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-6 py-3 rounded-full bg-primary text-white font-semibold"
+                    className="rounded-full bg-primary px-6 py-3 font-semibold text-white"
                   >
                     Contact Support
                   </motion.button>

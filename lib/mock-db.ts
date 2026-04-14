@@ -57,7 +57,8 @@ const SAMPLE_AUCTIONS: Auction[] = [
   {
     id: "3",
     title: "Classic Vintage Car - 1967 Mustang",
-    description: "Fully restored 1967 Ford Mustang in pristine condition. Original parts maintained.",
+    description:
+      "Fully restored 1967 Ford Mustang in pristine condition. Original parts maintained.",
     sellerId: "seller3",
     startingPrice: 2500000,
     reservePrice: 3500000,
@@ -65,9 +66,7 @@ const SAMPLE_AUCTIONS: Auction[] = [
     startTime: new Date("2025-01-15T10:00:00Z"),
     endTime: new Date("2025-02-20T10:00:00Z"),
     status: "ACTIVE",
-    images: [
-      "https://res.cloudinary.com/dwapqaaya/image/upload/v1737038648/cld-sample-4.jpg",
-    ],
+    images: ["https://res.cloudinary.com/dwapqaaya/image/upload/v1737038648/cld-sample-4.jpg"],
     category: ["Vehicles", "Classic Cars"],
     createdAt: new Date("2025-01-10T10:00:00Z"),
     updatedAt: new Date("2025-01-18T10:00:00Z"),
@@ -83,9 +82,7 @@ const SAMPLE_AUCTIONS: Auction[] = [
     startTime: new Date("2025-01-22T10:00:00Z"),
     endTime: new Date("2025-02-12T10:00:00Z"),
     status: "ACTIVE",
-    images: [
-      "https://res.cloudinary.com/dwapqaaya/image/upload/v1737038647/samples/coffee.jpg",
-    ],
+    images: ["https://res.cloudinary.com/dwapqaaya/image/upload/v1737038647/samples/coffee.jpg"],
     category: ["Art", "Paintings"],
     createdAt: new Date("2025-01-12T10:00:00Z"),
     updatedAt: new Date("2025-01-22T10:00:00Z"),
@@ -136,13 +133,13 @@ export const mockDB = {
       const auctions = mockDB.auctions.getAll();
       const index = auctions.findIndex((a) => a.id === id);
       if (index === -1) return null;
-      
+
       auctions[index] = {
         ...auctions[index],
         ...updates,
         updatedAt: new Date(),
       };
-      
+
       if (isBrowser) {
         localStorage.setItem(STORAGE_KEYS.AUCTIONS, JSON.stringify(auctions));
       }
@@ -153,7 +150,7 @@ export const mockDB = {
       const auctions = mockDB.auctions.getAll();
       const filtered = auctions.filter((a) => a.id !== id);
       if (filtered.length === auctions.length) return false;
-      
+
       if (isBrowser) {
         localStorage.setItem(STORAGE_KEYS.AUCTIONS, JSON.stringify(filtered));
       }
@@ -205,10 +202,10 @@ export const mockDB = {
       };
       bids.push(newBid);
       localStorage.setItem(STORAGE_KEYS.BIDS, JSON.stringify(bids));
-      
+
       // Update auction current price
       mockDB.auctions.update(bid.auctionId, { currentPrice: bid.amount });
-      
+
       return newBid;
     },
   },
@@ -227,12 +224,12 @@ export const mockDB = {
       if (!isBrowser) return false;
       const stored = localStorage.getItem(STORAGE_KEYS.WATCHLIST);
       const watchlist = stored ? JSON.parse(stored) : [];
-      
+
       // Check if already exists
       if (watchlist.some((w: any) => w.userId === userId && w.auctionId === auctionId)) {
         return false;
       }
-      
+
       watchlist.push({ userId, auctionId, addedAt: new Date().toISOString() });
       localStorage.setItem(STORAGE_KEYS.WATCHLIST, JSON.stringify(watchlist));
       return true;
@@ -242,12 +239,12 @@ export const mockDB = {
       if (!isBrowser) return false;
       const stored = localStorage.getItem(STORAGE_KEYS.WATCHLIST);
       if (!stored) return false;
-      
+
       const watchlist = JSON.parse(stored);
       const filtered = watchlist.filter(
         (w: any) => !(w.userId === userId && w.auctionId === auctionId)
       );
-      
+
       localStorage.setItem(STORAGE_KEYS.WATCHLIST, JSON.stringify(filtered));
       return true;
     },
