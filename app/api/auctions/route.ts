@@ -1,169 +1,63 @@
-// app/api/auctions/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-import connectDB from "@/lib/mongodb";
-import { Auction } from "@/models";
+import { mockDB } from "@/lib/mock-db";
+import { successResponse, errorHandler, errors } from "@/lib/api-error";
 
-// Define query parameters schema
-const QuerySchema = z.object({
-  page: z.coerce.number().positive().default(1),
-  limit: z.coerce.number().positive().default(10),
-  status: z
-    .enum(["DRAFT", "SCHEDULED", "ACTIVE", "ENDED", "CANCELLED"])
-    .optional(),
-  category: z.string().optional(),
-  minPrice: z.coerce.number().positive().optional(),
-  maxPrice: z.coerce.number().positive().optional(),
-  searchTerm: z.string().optional(),
-  sellerId: z.string().optional(),
-});
-
-
-const CreateAuctionSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-  startingPrice: z.number().positive(),
-  reservePrice: z.number().positive().optional(),
-  startTime: z.string().datetime(),
-  endTime: z.string().datetime(),
-  images: z.array(z.string()),
-  category: z.array(z.string()),
-});
-
-export async function GET(req: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    await connectDB();
-    // Parse query parameters
-    const url = new URL(req.url);
-    const rawParams = Object.fromEntries(url.searchParams.entries());
-    const queryParams = QuerySchema.parse(rawParams);
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get("category");
+    const status = searchParams.get("status");
+    const query = searchParams.get("q");
 
-    // Build filter conditions
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const filter: any = {};
+    let auctions = mockDB.auctions.getAll();
 
-    if (queryParams.status) {
-      filter.status = queryParams.status;
+    // Apply filters
+    if (category) {
+      auctions = mockDB.auctions.filterByCategory(category);
     }
 
-    if (queryParams.category) {
-      filter.category = queryParams.category;
+    if (status) {
+      auctions = mockDB.auctions.filterByStatus(status as any);
     }
 
-    if (queryParams.minPrice || queryParams.maxPrice) {
-      filter.currentPrice = {};
-      if (queryParams.minPrice) {
-        filter.currentPrice.$gte = queryParams.minPrice;
-      }
-      if (queryParams.maxPrice) {
-        filter.currentPrice.$lte = queryParams.maxPrice;
-      }
+    if (query) {
+      auctions = mockDB.auctions.search(query);
     }
 
-    if (queryParams.searchTerm) {
-      filter.$or = [
-        { title: { $regex: queryParams.searchTerm, $options: "i" } },
-        { description: { $regex: queryParams.searchTerm, $options: "i" } },
-      ];
-    }
+    // Sort by most recent
+    auctions.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 
-    if (queryParams.sellerId) {
-      filter.sellerId = queryParams.sellerId;
-    }
-
-    // Calculate pagination
-    const skip = (queryParams.page - 1) * queryParams.limit;
-
-    // Execute query
-    const [auctions, totalCount] = await Promise.all([
-      Auction.find(filter)
-        .skip(skip)
-        .limit(queryParams.limit)
-        .populate("sellerId", "name email")
-        .sort({ createdAt: -1 })
-        .lean(),
-      Auction.countDocuments(filter),
-    ]);
-
-    // Calculate pagination metadata
-    const totalPages = Math.ceil(totalCount / queryParams.limit);
-    const hasNextPage = queryParams.page < totalPages;
-    const hasPrevPage = queryParams.page > 1;
-
-    return NextResponse.json({
-      status: "success",
-      data: {
-        auctions,
-        pagination: {
-          currentPage: queryParams.page,
-          totalPages,
-          totalItems: totalCount,
-          hasNextPage,
-          hasPrevPage,
-          itemsPerPage: queryParams.limit,
-        },
-      },
-    });
+    return successResponse(auctions);
   } catch (error) {
-    console.error("Error fetching auctions:", error);
-
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          status: "error",
-          message: "Invalid query parameters",
-          errors: error.errors,
-        },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json(
-      {
-        status: "error",
-        message: "Internal server error",
-      },
-      { status: 500 }
-    );
+    return errorHandler(error);
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-    await connectDB();
-    const body = await req.json();
-    const validatedData = CreateAuctionSchema.parse(body);
+    const body = await request.json();
 
-    const auction = await Auction.create({
-      ...validatedData,
-      sellerId: req.headers.get("userId"), // Assuming user ID is passed in header
-      currentPrice: validatedData.startingPrice,
-      status: "DRAFT",
+    // Validate required fields
+    if (!body.title || !body.startingPrice || !body.endTime) {
+      throw errors.badRequest("Missing required fields");
+    }
+
+    const newAuction = mockDB.auctions.create({
+      title: body.title,
+      description: body.description || "",
+      sellerId: body.sellerId || "demo-seller",
+      startingPrice: Number(body.startingPrice),
+      reservePrice: body.reservePrice ? Number(body.reservePrice) : undefined,
+      currentPrice: Number(body.startingPrice),
+      startTime: body.startTime ? new Date(body.startTime) : new Date(),
+      endTime: new Date(body.endTime),
+      status: body.status || "DRAFT",
+      images: body.images || [],
+      category: body.category || [],
     });
 
-    return NextResponse.json(
-      {
-        status: "success",
-        data: auction,
-      },
-      { status: 201 }
-    );
+    return successResponse(newAuction, 201);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { status: "error", errors: error.errors },
-        { status: 400 }
-      );
-    }
-    return NextResponse.json(
-      { status: "error", message: "Internal server error" },
-      { status: 500 }
-    );
+    return errorHandler(error);
   }
 }
-
-// Example API calls:
-// Basic listing: /api/auctions
-// With filters: /api/auctions?status=ACTIVE&minPrice=100&maxPrice=1000
-// With search: /api/auctions?searchTerm=vintage&category=electronics
-// With pagination: /api/auctions?page=2&limit=20

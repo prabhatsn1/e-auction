@@ -1,6 +1,7 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const AuctionUpdatePage: React.FC = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const id = typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : '';
   const [auction, setAuction] = useState({
     title: "",
     description: "",

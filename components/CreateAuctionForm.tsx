@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { CldUploadWidget } from "next-cloudinary";
@@ -67,10 +68,22 @@ export default function CreateAuctionForm() {
     };
 
     try {
-      // Add your API call here
-      console.log("Auction Data:", auctionData);
+      const response = await fetch('/api/auctions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(auctionData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert('Auction created successfully!');
+        window.location.href = '/auctions';
+      } else {
+        alert('Failed to create auction');
+      }
     } catch (error) {
       console.error("Error creating auction:", error);
+      alert('Error creating auction');
     } finally {
       setIsSubmitting(false);
     }
@@ -207,7 +220,7 @@ export default function CreateAuctionForm() {
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <DollarSign className="h-5 w-5 text-gray-400" />
+                  <span className="text-gray-400">₹</span>
                 </div>
                 <input
                   type="number"
@@ -215,9 +228,9 @@ export default function CreateAuctionForm() {
                   id="startingPrice"
                   required
                   min="0"
-                  step="0.01"
+                  step="1"
                   className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500"
-                  placeholder="0.00"
+                  placeholder="0"
                 />
               </div>
             </div>
@@ -231,16 +244,16 @@ export default function CreateAuctionForm() {
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <DollarSign className="h-5 w-5 text-gray-400" />
+                  <span className="text-gray-400">₹</span>
                 </div>
                 <input
                   type="number"
                   name="reservePrice"
                   id="reservePrice"
                   min="0"
-                  step="0.01"
+                  step="1"
                   className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500"
-                  placeholder="0.00"
+                  placeholder="0"
                 />
               </div>
             </div>

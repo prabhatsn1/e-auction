@@ -1,10 +1,8 @@
 export interface Bid {
   id: string;
   auctionId: string;
-  bidderId: string;
+  userId: string;
   amount: number;
-  maxAmount?: number; // for proxy bidding
-  status: "ACTIVE" | "OUTBID" | "WINNING";
-  createdAt: Date;
-  automaticBidding: boolean;
+  timestamp: Date;
+  status: "ACTIVE" | "OUTBID" | "WON" | "LOST";
 }

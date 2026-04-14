@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Gavel, Mail, Lock, ArrowRight } from "lucide-react";
 

@@ -1,58 +1,48 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChevronRight, Timer } from "lucide-react";
-import React from "react";
-import { Card, CardContent } from "./ui/card";
-import Image from "next/image";
+"use client";
+
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { AuctionCard } from "./auctions/AuctionCard";
+import { FadeIn, StaggerContainer, StaggerItem } from "./motion/FadeIn";
 import { Auction } from "@/types/Auction";
 
 interface FeatureAuctionProps {
   featuredAuctions: Auction[];
 }
 
-const FeatureAuction: React.FC<FeatureAuctionProps> = ({
-  featuredAuctions,
-}) => {
-  return (
-    <section className="py-12">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h3 className="text-2xl font-bold">Featured Auctions</h3>
-          <button className="text-blue-600 flex items-center">
-            View All <ChevronRight className="h-4 w-4 ml-1" />
-          </button>
+const FeatureAuction: React.FC<FeatureAuctionProps> = ({ featuredAuctions }) => (
+  <section className="py-20" aria-labelledby="featured-heading">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <FadeIn className="flex justify-between items-end mb-10">
+        <div>
+          <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-2">Live Now</p>
+          <h2 id="featured-heading" className="font-display text-4xl font-bold tracking-tight">
+            Featured Auctions
+          </h2>
         </div>
+        <Link href="/auctions">
+          <motion.span
+            whileHover={{ x: 4 }}
+            className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+          >
+            View All <ChevronRight className="h-4 w-4" />
+          </motion.span>
+        </Link>
+      </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {featuredAuctions.map((auction: any) => (
-            <Card
-              key={auction.id}
-              className="hover:shadow-lg transition-shadow"
-            >
-              <CardContent className="p-0">
-                <Image
-                  src={auction.imageUrl}
-                  alt={auction.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-48 object-cover rounded-t-lg"
-                />
-                <div className="p-4">
-                  <h4 className="font-semibold mb-2">{auction.title}</h4>
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>Current Bid: ${auction.currentBid}</span>
-                    <span className="flex items-center">
-                      <Timer className="h-4 w-4 mr-1" />
-                      {auction.timeLeft}
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+      <StaggerContainer
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        staggerDelay={0.1}
+      >
+        {featuredAuctions.map((auction) => (
+          <StaggerItem key={auction.id}>
+            <AuctionCard auction={auction} />
+          </StaggerItem>
+        ))}
+      </StaggerContainer>
+    </div>
+  </section>
+);
 
 export default FeatureAuction;

@@ -1,54 +1,56 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 interface AuctionTimerProps {
   endTime: Date;
+  compact?: boolean;
 }
 
-export const AuctionTimer = ({ endTime }: AuctionTimerProps) => {
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+export const AuctionTimer = ({ endTime, compact = true }: AuctionTimerProps) => {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const end = new Date(endTime).getTime();
-      const distance = end - now;
-
+    const tick = () => {
+      const distance = new Date(endTime).getTime() - Date.now();
+      if (distance <= 0) return setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        ),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
+        days: Math.floor(distance / 86400000),
+        hours: Math.floor((distance % 86400000) / 3600000),
+        minutes: Math.floor((distance % 3600000) / 60000),
+        seconds: Math.floor((distance % 60000) / 1000),
       });
-    }, 1000);
-
-    return () => clearInterval(timer);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
   }, [endTime]);
 
+  if (compact) {
+    const { days, hours, minutes, seconds } = timeLeft;
+    const isUrgent = days === 0 && hours < 2;
+    return (
+      <span className={`font-mono font-semibold text-xs ${isUrgent ? "text-red-500" : "text-foreground"}`}>
+        {days > 0 ? `${days}d ` : ""}{String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+      </span>
+    );
+  }
+
+  const units = [
+    { label: "Days", value: timeLeft.days },
+    { label: "Hrs", value: timeLeft.hours },
+    { label: "Min", value: timeLeft.minutes },
+    { label: "Sec", value: timeLeft.seconds },
+  ];
+
   return (
-    <div className="flex gap-2 text-sm">
-      <div className="bg-primary/10 rounded-md p-2 text-center">
-        <span className="font-bold">{timeLeft.days}</span>
-        <p className="text-xs text-muted-foreground">Days</p>
-      </div>
-      <div className="bg-primary/10 rounded-md p-2 text-center">
-        <span className="font-bold">{timeLeft.hours}</span>
-        <p className="text-xs text-muted-foreground">Hours</p>
-      </div>
-      <div className="bg-primary/10 rounded-md p-2 text-center">
-        <span className="font-bold">{timeLeft.minutes}</span>
-        <p className="text-xs text-muted-foreground">Mins</p>
-      </div>
-      <div className="bg-primary/10 rounded-md p-2 text-center">
-        <span className="font-bold">{timeLeft.seconds}</span>
-        <p className="text-xs text-muted-foreground">Secs</p>
-      </div>
+    <div className="flex gap-2">
+      {units.map(({ label, value }) => (
+        <div key={label} className="bg-accent rounded-lg px-2.5 py-1.5 text-center min-w-[44px]">
+          <span className="font-bold text-sm block">{String(value).padStart(2, "0")}</span>
+          <span className="text-[10px] text-muted-foreground">{label}</span>
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,0 +1,116 @@
+"use client";
+
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
+import { Users, Target, Award, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
+
+const values = [
+  { icon: Users, title: "Community First", desc: "Building trust between buyers and sellers worldwide" },
+  { icon: Target, title: "Transparency", desc: "Clear processes, fair pricing, no hidden fees" },
+  { icon: Award, title: "Quality", desc: "Verified items and authenticated sellers only" },
+  { icon: TrendingUp, title: "Innovation", desc: "Cutting-edge technology for seamless auctions" },
+];
+
+const stats = [
+  { value: "2019", label: "Founded" },
+  { value: "120K+", label: "Active Users" },
+  { value: "50K+", label: "Items Sold" },
+  { value: "150+", label: "Countries" },
+];
+
+export default function AboutPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      <main className="pt-20">
+        {/* Hero */}
+        <section className="py-20 bg-gradient-to-b from-secondary/40 to-background">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <FadeIn>
+              <h1 className="font-display text-5xl font-bold tracking-tight mb-6">
+                About <span className="gradient-text">E-Auction</span>
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                We're on a mission to make online auctions transparent, secure, and accessible to everyone. 
+                Since 2019, we've connected millions of buyers with verified sellers worldwide.
+              </p>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section className="py-16 border-y border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8" staggerDelay={0.1}>
+              {stats.map((stat) => (
+                <StaggerItem key={stat.label}>
+                  <div className="text-center">
+                    <p className="font-display text-4xl font-bold gradient-text mb-2">{stat.value}</p>
+                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  </div>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          </div>
+        </section>
+
+        {/* Values */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <FadeIn className="text-center mb-12">
+              <h2 className="font-display text-3xl font-bold mb-3">Our Values</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                These principles guide everything we do, from product development to customer support.
+              </p>
+            </FadeIn>
+
+            <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.08}>
+              {values.map((v) => (
+                <StaggerItem key={v.title}>
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    className="p-6 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all text-center"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                      <v.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold mb-2">{v.title}</h3>
+                    <p className="text-sm text-muted-foreground">{v.desc}</p>
+                  </motion.div>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          </div>
+        </section>
+
+        {/* Story */}
+        <section className="py-20 bg-secondary/40">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <FadeIn>
+              <h2 className="font-display text-3xl font-bold mb-6">Our Story</h2>
+              <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
+                <p>
+                  E-Auction was born from a simple frustration: online auctions were complicated, 
+                  opaque, and often felt risky. We knew there had to be a better way.
+                </p>
+                <p>
+                  In 2019, our founders—collectors and tech enthusiasts—set out to build the auction 
+                  platform they wished existed. One that prioritized transparency, security, and user experience above all else.
+                </p>
+                <p>
+                  Today, E-Auction serves over 120,000 users across 150+ countries, facilitating millions 
+                  in transactions every month. But we're just getting started.
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
