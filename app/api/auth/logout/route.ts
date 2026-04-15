@@ -1,14 +1,11 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import cookie from "cookie";
+import { NextRequest, NextResponse } from "next/server";
+import { serialize } from "cookie";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
-  res.setHeader(
+export async function POST(request: NextRequest) {
+  const response = NextResponse.json({ message: "Logged out successfully" });
+  response.headers.set(
     "Set-Cookie",
-    cookie.serialize("token", "", {
+    serialize("token", "", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
@@ -17,5 +14,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
   );
 
-  return res.json({ message: "Logged out successfully" });
+  return response;
 }

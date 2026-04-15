@@ -5,6 +5,8 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer";
 import { FadeIn } from "@/components/motion/FadeIn";
 
+export const dynamic = 'force-dynamic';
+
 export default function CreateAuction() {
   return (
     <div className="min-h-screen bg-background">

@@ -2,7 +2,8 @@ import { NextRequest } from "next/server";
 import { mockDB } from "@/lib/mock-db";
 import { successResponse, errorHandler, errors } from "@/lib/api-error";
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   try {
     const body = await request.json();
     const { bidAmount } = body;
@@ -11,7 +12,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       throw errors.badRequest("Invalid bid amount");
     }
 
-    const auction = mockDB.auctions.getById(params.id);
+    const auction = mockDB.auctions.getById(id);
 
     if (!auction) {
       throw errors.notFound("Auction");
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 
     // Create bid
     const newBid = mockDB.bids.create({
-      auctionId: params.id,
+      auctionId: id,
       userId: "demo-user", // In real app, get from auth
       amount: bidAmount,
     });

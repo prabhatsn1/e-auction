@@ -1,35 +1,18 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
+// import prisma from "@/lib/prisma";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "GET") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
+export async function GET(request: NextRequest) {
   try {
-    const { token } = req.query;
-    if (!token || typeof token !== "string") {
-      return res.status(400).json({ message: "Invalid verification token" });
+    const { searchParams } = new URL(request.url);
+    const token = searchParams.get("token");
+    
+    if (!token) {
+      return NextResponse.json({ message: "Invalid verification token" }, { status: 400 });
     }
 
-    const user = await prisma.user.findFirst({
-      where: { verificationToken: token },
-    });
-
-    if (!user) {
-      return res.status(400).json({ message: "Invalid verification token" });
-    }
-
-    await prisma.user.update({
-      where: { id: user.id },
-      data: {
-        emailVerified: true,
-        verificationToken: null,
-      },
-    });
-
-    return res.json({ message: "Email verified successfully" });
-  } catch (error) {
-    return res.status(500).json({ message: "Internal server error" + error });
+    // TODO: Implement with actual database
+    return NextResponse.json({ message: "Verify email endpoint - database not configured" }, { status: 501 });
+  } catch {
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }

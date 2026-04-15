@@ -242,7 +242,7 @@ export default function DashboardPage() {
                               <span>
                                 Current bid:{" "}
                                 <span className="font-semibold text-foreground">
-                                  ₹{sale.currentBid.toLocaleString("en-IN")}
+                                  ₹{sale.currentBid?.toLocaleString("en-IN")}
                                 </span>
                               </span>
                               <span>{sale.bids} bids</span>
@@ -258,7 +258,7 @@ export default function DashboardPage() {
                               <span>
                                 Sold for:{" "}
                                 <span className="font-semibold text-foreground">
-                                  ₹{sale.finalPrice.toLocaleString("en-IN")}
+                                  ₹{sale.finalPrice?.toLocaleString("en-IN")}
                                 </span>
                               </span>
                               <span>{sale.soldDate}</span>

@@ -2,11 +2,12 @@ import connectDB from "@/lib/mongodb";
 import { Bid } from "@/models";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: { userId: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ userId: string }> }) {
   try {
     await connectDB();
+    const { userId } = await params;
 
-    const bids = await Bid.find({ bidderId: params.userId })
+    const bids = await Bid.find({ bidderId: userId })
       .populate("auctionId", "title currentPrice endTime status")
       .sort({ createdAt: -1 })
       .lean();

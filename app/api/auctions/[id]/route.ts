@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { mockDB } from "@/lib/mock-db";
 import { successResponse, errorHandler, errors } from "@/lib/api-error";
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const auction = mockDB.auctions.getById(params.id);
+    const { id } = await params;
+    const auction = mockDB.auctions.getById(id);
 
     if (!auction) {
       throw errors.notFound("Auction");
@@ -16,10 +17,11 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const body = await request.json();
-    const updatedAuction = mockDB.auctions.update(params.id, body);
+    const updatedAuction = mockDB.auctions.update(id, body);
 
     if (!updatedAuction) {
       throw errors.notFound("Auction");
@@ -31,9 +33,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const deleted = mockDB.auctions.delete(params.id);
+    const { id } = await params;
+    const deleted = mockDB.auctions.delete(id);
 
     if (!deleted) {
       throw errors.notFound("Auction");
